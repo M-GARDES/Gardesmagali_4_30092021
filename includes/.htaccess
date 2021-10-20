@@ -7,7 +7,6 @@ BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
 SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
 #les proxies doivent donner le bon contenu
 Header append Vary User-Agent env=!dont-vary
-
 # BEGIN Expire headers
 <IfModule mod_expires.c>
  ExpiresActive On
@@ -28,9 +27,7 @@ Header append Vary User-Agent env=!dont-vary
  ExpiresByType application/javascript A259200
  ExpiresByType application/x-javascript "access plus 3 years"
  ExpiresByType application/x-shockwave-flash "3 years"
-</IfModule>
-# END Expire headers
-
+</IfModule># END Expire headers
 # BEGIN Cache-Control Headers
 <IfModule mod_headers.c>
  <FilesMatch "\\.(ico|jpe?g|png|gif|swf|gz|ttf)$">
@@ -49,24 +46,19 @@ Header set Cache-Control "max-age=2592000, public"
 <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
 Header unset Cache-Control
 </FilesMatch>
-</IfModule>
-# END Cache-Control Headers
-
+</IfModule># END Cache-Control Headers
 # KILL THEM ETAGS
 Header unset ETag
 FileETag none
-
 # protect wpconfig.php
 <files wp-config.php>
 order allow,deny
 deny from all
 </files>
-
 # protect the htaccess file
 <files .htaccess>
 order allow,deny
 deny from all
 </files>
-
 # protection de la lecture des répertoires
 Options -Indexes
